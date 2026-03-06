@@ -48,7 +48,7 @@ class RoomResource extends JsonResource
         $this->whenLoaded('features')
         ),
 
-        // ✅ COUNT optimisé
+/*        // ✅ COUNT optimisé
         'reservations_count' => $this->whenCounted('reservations'),
 
         // ✅ Disponibilités safe
@@ -57,7 +57,7 @@ class RoomResource extends JsonResource
         'date' => $a->date,
         'is_available' => $a->is_available,
     ])
-    ),
+    ),*/
 
         'created_at' => $this->created_at,
     ];

@@ -2,39 +2,22 @@
 
 
 namespace App\Http\Controllers;
-
-
-use App\Models\Order;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    public function show(Order $order, Request $request)
+    public function success(Request $request)
     {
-        $payment = $order->payment;
+        // Si tu passes des infos en query params
+        $reference = $request->query('reference');
 
-        logger($payment);
-        if (!$payment || $payment->token !== $request->token) {
-            abort(403);
-        }
-
-        return view('payment.pay', compact('order'));
+        return view('payment.success', compact('reference'));
     }
 
-    public function success(Order $order)
+    public function failed(Request $request)
     {
-        $order->payment->update([
-            'status' => 'success'
-        ]);
+        $reference = $request->query('reference');
 
-        return view('payment.success');
-    }
-
-    public function cancel(Order $order)
-    {
-        $order->payment->update([
-            'status' => 'failed'
-        ]);
-        return view('payment.cancel');
+        return view('payment.failed', compact('reference'));
     }
 }

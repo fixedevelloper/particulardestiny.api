@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\TranzakWebhookController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,5 +9,6 @@ Route::get('/', function () {
 });
 // web.php
 Route::get('/pay/{order}', [PaymentController::class, 'show']);
-Route::get('/payment/success/{order}', [PaymentController::class, 'success']);
-Route::get('/payment/cancel/{order}', [PaymentController::class, 'cancel']);
+Route::get('/payment/success', [PaymentController::class, 'success']);
+Route::get('/payment/cancel', [PaymentController::class, 'failed']);
+Route::post('/tranzak/webhook', [TranzakWebhookController::class, 'handle']);

@@ -78,7 +78,7 @@ class RoomController extends Controller
             }, '=', count($dates)) // s'assurer que toutes les dates sont disponibles
             ->get();
 
-        $rws=Room::with(['roomType', 'category', 'features', 'images']);
+        $rws=Room::with(['roomType', 'category', 'features', 'images','featuredImage']);
         return Helpers::success(RoomResource::collection($rws->get()));
     }
     /**

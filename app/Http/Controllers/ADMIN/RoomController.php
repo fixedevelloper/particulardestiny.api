@@ -22,9 +22,7 @@ class RoomController extends Controller
             'featuredImage',
             'images',
             'features',
-            'availabilities'
         ])
-            ->withCount('reservations')
             ->paginate(10);
 
         return RoomResource::collection($rooms);

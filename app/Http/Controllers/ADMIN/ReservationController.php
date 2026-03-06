@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ADMIN;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ReservationDetailResource;
 use App\Models\Reservation;
 use App\Models\Room;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::with(['user', 'room'])->get();
+        $reservations = Reservation::with(['user','items'])->get();
 
         return response()->json([
             'success' => true,
@@ -29,19 +30,10 @@ class ReservationController extends Controller
      */
     public function show($id)
     {
-        $reservation = Reservation::with(['user', 'room'])->find($id);
+        // Charger les relations pour éviter N+1
+        $reservation = Reservation::with(['user', 'country', 'items'])->findOrFail($id);
 
-        if (!$reservation) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Réservation introuvable'
-            ], 404);
-        }
-
-        return response()->json([
-            'success' => true,
-            'data' => $reservation
-        ]);
+        return new ReservationDetailResource($reservation);
     }
 
     /**

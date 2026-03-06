@@ -14,11 +14,14 @@ class Payment extends Model
         'amount',
         'method',
         'transaction_id',
+        'provider_id',
+        'provider_response',
         'status',
     ];
 
     protected $casts = [
         'amount' => 'decimal:2',
+        'provider_response'=>'array',
     ];
 
     /**

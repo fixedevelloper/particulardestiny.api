@@ -53,13 +53,6 @@ class Room extends Model
     }
 
     /**
-     * Relation avec les réservations
-     */
-    public function reservations()
-    {
-        return $this->hasMany(Reservation::class);
-    }
-    /**
      * Images de la chambre
      */
     public function featuredImage()
