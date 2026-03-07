@@ -29,7 +29,7 @@ class TransactService
      * 🔐 Auth
      */
     public function authenticate(): void
-    {  Log::error('TRANZAK AUTH RESPONSE', env('TRANSZAK_APP_KEY'));
+    {  logger('Tras'.env('TRANSZAK_APP_KEY'));
         $response = Http::post($this->base_url . '/auth/token', [
             "appId" => env('TRANSZAK_APP_ID'),
             "appKey" => env('TRANSZAK_APP_KEY')
