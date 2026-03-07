@@ -39,6 +39,7 @@ class TransactService
             "appKey" => 'SAND_9907F7E3F17F478EA11693E21D17AA4A'
         ]);
 
+        logger($response->getHeaders());
         $data_response = $response->json();
 
         if (($data_response['success'] ?? null)) {
