@@ -21,7 +21,7 @@ class TransactService
      */
     public function __construct()
     {
-        $this->base_url = (env('APP_ENV') === 'local')
+        $this->base_url = (config('app.env') === 'local')
             ? 'https://sandbox.dsapi.tranzak.me'
             : 'https://dsapi.tranzak.me';
     }
@@ -29,17 +29,19 @@ class TransactService
      * 🔐 Auth
      */
     public function authenticate(): void
-    {  logger('Tras'.env('TRANSZAK_APP_KEY'));
-/*        $response = Http::post($this->base_url . '/auth/token', [
-            "appId" => env('TRANSZAK_APP_ID'),
-            "appKey" => env('TRANSZAK_APP_KEY')
-        ]);*/
-        $response = Http::post($this->base_url . '/auth/token', [
-            "appId" => 'apzz7lyly6eq03',
-            "appKey" => 'SAND_9907F7E3F17F478EA11693E21D17AA4A'
+    {
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json'
+        ])->post($this->base_url . '/auth/token', [
+            "appId" => config('services.tranzak.appId'),
+            "appKey" => config('services.tranzak.appKey')
         ]);
 
-        logger($response->getHeaders());
+        logger([
+            'status' => $response->status(),
+            'body' => $response->body(),
+        ]);
         $data_response = $response->json();
 
         if (($data_response['success'] ?? null)) {
