@@ -31,13 +31,12 @@ class TransactService
     public function authenticate(): void
     {
         $response = Http::post($this->base_url . '/auth/token', [
-            "appId" => config('services.tranzak.appId'),
-            "appKey" => config('services.tranzak.appKey')
+            "appId" => env('TRANSZAK_APP_ID'),
+            "appKey" => env('TRANSZAK_APP_KEY')
         ]);
 
         $data_response = $response->json();
-        Log::error('TRANZAK AUTH RESPONSE', config('services.tranzak.appId'));
-        Log::error('TRANZAK AUTH RESPONSE', config('services.tranzak.appKey'));
+        Log::error('TRANZAK AUTH RESPONSE', env('TRANSZAK_APP_KEY'));
         if (($data_response['success'] ?? null)) {
             $data=$data_response['data'];
             Cache::put('tranzak_token', $data['token'], now()->addMinutes(50));
