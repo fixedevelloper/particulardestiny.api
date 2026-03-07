@@ -29,14 +29,14 @@ class TransactService
      * 🔐 Auth
      */
     public function authenticate(): void
-    {
+    {  Log::error('TRANZAK AUTH RESPONSE', env('TRANSZAK_APP_KEY'));
         $response = Http::post($this->base_url . '/auth/token', [
             "appId" => env('TRANSZAK_APP_ID'),
             "appKey" => env('TRANSZAK_APP_KEY')
         ]);
 
         $data_response = $response->json();
-        Log::error('TRANZAK AUTH RESPONSE', env('TRANSZAK_APP_KEY'));
+
         if (($data_response['success'] ?? null)) {
             $data=$data_response['data'];
             Cache::put('tranzak_token', $data['token'], now()->addMinutes(50));
