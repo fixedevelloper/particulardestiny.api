@@ -36,7 +36,7 @@ class TransactService
         ]);
 
         $data_response = $response->json();
-
+        Log::error('TRANZAK AUTH RESPONSE', $data_response);
         if (($data_response['success'] ?? null)) {
             $data=$data_response['data'];
             Cache::put('tranzak_token', $data['token'], now()->addMinutes(50));
