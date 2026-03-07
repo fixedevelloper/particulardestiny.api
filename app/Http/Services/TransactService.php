@@ -30,9 +30,13 @@ class TransactService
      */
     public function authenticate(): void
     {  logger('Tras'.env('TRANSZAK_APP_KEY'));
-        $response = Http::post($this->base_url . '/auth/token', [
+/*        $response = Http::post($this->base_url . '/auth/token', [
             "appId" => env('TRANSZAK_APP_ID'),
             "appKey" => env('TRANSZAK_APP_KEY')
+        ]);*/
+        $response = Http::post($this->base_url . '/auth/token', [
+            "appId" => 'apzz7lyly6eq03',
+            "appKey" => 'SAND_9907F7E3F17F478EA11693E21D17AA4A'
         ]);
 
         $data_response = $response->json();
