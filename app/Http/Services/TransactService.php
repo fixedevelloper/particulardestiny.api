@@ -61,7 +61,11 @@ class TransactService
             'mchTransactionRef' => $request_data['reference'] ?? uniqid('PAY-'),
             'returnUrl' => $request_data['success_url'] ?? '',
             'cancelUrl' => $request_data['cancel_url'] ?? '',
-            'callbackUrl' => $request_data['callback_url'] ?? ''
+            'callbackUrl' => $request_data['callback_url'] ?? '',
+            'customization'=>[
+                'title'=>'Destiny suites hotel',
+                'logoUrl'=>'https://particulardestiny.cscreativ.com/logo.png'
+            ]
         ];
 
         $response = $this->request('xp021/v1/request/create', $data);

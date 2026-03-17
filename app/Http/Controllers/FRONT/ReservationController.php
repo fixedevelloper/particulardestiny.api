@@ -194,7 +194,7 @@ class ReservationController extends Controller
                 'success_url' => url('/payment/success'),
                 'cancel_url' => url('/payment/cancel'),
                 'callback_url' => url('/tranzak/webhook'),
-                'description' => 'Paiement réservation chambre'
+                'description' => 'Paiement réservation suites'
             ]);
 
             // 7️⃣ créer paiement
